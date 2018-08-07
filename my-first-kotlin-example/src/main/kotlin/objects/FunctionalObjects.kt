@@ -11,6 +11,13 @@ fun calc(int1: Int, int2: Int, acc: (Int, Int) -> Int): Int {
 fun tasu(int1: Int, int2: Int): Int = int1 + int2
 fun hiku(int1: Int, int2: Int): Int = int1 - int2
 
+inline fun doubleUnless100(int: () -> Int): Int {
+    if (int() < 100) {
+        return 2 * int()
+    }
+    return int()
+}
+
 
 fun main(args: Array<String>) {
     val func = ::double
@@ -33,4 +40,8 @@ fun main(args: Array<String>) {
     println(calc(10, 20, hikuLambda))
     println(calc(10, 20) { int1: Int, int2: Int -> int1 + int2})
     println(calc(10, 20) { int1: Int, int2: Int -> int1 - int2})
+
+    // inline
+    println(doubleUnless100({88}))
+    println(doubleUnless100({101}))
 }
