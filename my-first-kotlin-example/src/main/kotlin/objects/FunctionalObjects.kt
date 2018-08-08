@@ -44,4 +44,8 @@ fun main(args: Array<String>) {
     // inline
     println(doubleUnless100({88}))
     println(doubleUnless100({101}))
+
+    // anonymous function
+    val ano: (String) -> String = fun(s: String) = s + s
+    println(ano("abc"))
 }
