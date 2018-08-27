@@ -87,12 +87,20 @@ fun main(args: Array<String>) {
 
             val scan = Scan()
             val resultScanner = table.getScanner(scan)
+            resultScanner.forEach { result ->
+                val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
+                val scanAge = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
+                println("scan name: $scanName")
+                println("scan age: $scanAge")
+            }
+            /*
             for (result in resultScanner) {
                 val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
                 val scanAge = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
                 println("scan name: $scanName")
                 println("scan age: $scanAge")
             }
+            */
 
 
             // mutateRow
