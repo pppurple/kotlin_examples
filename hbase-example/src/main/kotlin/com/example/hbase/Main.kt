@@ -14,32 +14,12 @@ fun main(args: Array<String>) {
     //val table: HTableInterface = HTable(conf, "")
 
     ConnectionFactory.createConnection(conf).use {
-        /*
-        println("********conn")
-        val tableee = TableName.valueOf("myspace:mytable")
-        println("********table:" + tableee)
-        val t = it.getTable(tableee)
-        println("********t:" + t)
-
-        // get
-        val get = t.get(Get(Bytes.toBytes("row1")))
-        // Print the results
-        val value = Bytes.toString(get.getValue(Bytes.toBytes("myfamily"), Bytes.toBytes("name")))
-        println("***" + "r1:" + value);
-
-
-        var r1 = Put(Bytes.toBytes("r1"))
-        r1.addColumn(Bytes.toBytes("myfamily"), Bytes.toBytes("test"), Bytes.toBytes("pppp"))
-        println("********add:")
-        t.put(r1)
-        println("********added:")
-        t.close()
-        println("********closed:")
-        */
-
         val tableName= TableName.valueOf("myspace:people")
         it.getTable(tableName).use { table ->
+            cleanup(table) // cleanup
+
             // exists
+            println("******exists")
             val getRow = Get(Bytes.toBytes("row1"))
             val existsRow = table.exists(getRow)
             println("row1 exists?: $existsRow")
@@ -48,6 +28,7 @@ fun main(args: Array<String>) {
             println("row1 f name exists?: $existsCol")
 
             // put
+            println("******put")
             val put = Put(Bytes.toBytes("row1"))
             // row1.add(Bytes.toBytes(""), Bytes.toBytes(""), Bytes.toBytes(""))
             put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Alice"))
@@ -55,6 +36,7 @@ fun main(args: Array<String>) {
             table.put(put)
 
             // get
+            println("******get")
             val get = Get(Bytes.toBytes("row1"))
             get.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"))
             get.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"))
@@ -65,6 +47,7 @@ fun main(args: Array<String>) {
             println("row1 age: $age")
 
             // delete (row)
+            println("******delete")
             val deleteAll = Delete(Bytes.toBytes("row1"))
             table.delete(deleteAll)
             // delete (column)
@@ -74,6 +57,7 @@ fun main(args: Array<String>) {
             table.delete(delete)
 
             // scan
+            println("******scan")
             table.delete(deleteAll) // cleanup
             table.put(put)
             val put2 = Put(Bytes.toBytes("row2"))
@@ -104,6 +88,7 @@ fun main(args: Array<String>) {
 
 
             // mutateRow
+            println("******mutateRow")
             table.delete(deleteAll) // cleanup
             val rowMutations = RowMutations(Bytes.toBytes("row1"))
             rowMutations.add(put)
@@ -113,10 +98,19 @@ fun main(args: Array<String>) {
             table.mutateRow(rowMutations)
 
 
-
-
             val putRow2 = Put(Bytes.toBytes("row2"))
             putRow2.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Bobby"))
         }
+    }
+}
+
+fun cleanup(table: Table) {
+    val deleteAll = listOf(
+            Delete(Bytes.toBytes("row1")),
+            Delete(Bytes.toBytes("row2")),
+            Delete(Bytes.toBytes("row3"))
+    )
+    deleteAll.forEach {
+        table.delete(it)
     }
 }
