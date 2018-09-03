@@ -9,10 +9,10 @@ import org.apache.hadoop.hbase.util.Bytes
 fun main(args: Array<String>) {
     val conf= HBaseConfiguration.create()
     conf.set("hbase.zookeeper.quorum", "127.0.0.1")
-    //conf.set("hbase.zookeeper.quorum", "localhost")
     conf.set("hbase.zookeeper.property.clientPort","2181")
-    //conf.set("hbase.security.authentication", "kerberos")
-    //val table: HTableInterface = HTable(conf, "")
+
+    // deprecated!! (< 1.0)
+    // val table: HTableInterface = HTable(conf, "")
 
     ConnectionFactory.createConnection(conf).use {
         val tableName= TableName.valueOf("myspace:people")
@@ -65,7 +65,6 @@ fun main(args: Array<String>) {
             println("******compare and swap")
             cleanup(table) // cleanup
             cas(table)
-
         }
     }
 }
