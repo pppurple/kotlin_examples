@@ -74,7 +74,7 @@ fun put(table: Table) {
     val put = Put(Bytes.toBytes("row1"))
     // row1.add(Bytes.toBytes(""), Bytes.toBytes(""), Bytes.toBytes(""))
     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Alice"))
-    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes("20"))
+    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(20))
     table.put(put)
 }
 
@@ -93,7 +93,7 @@ fun get(table: Table) {
     get.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"))
     val getResult = table.get(get)
     val name = Bytes.toString(getResult.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
-    val age = Bytes.toString(getResult.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
+    val age = Bytes.toInt(getResult.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
     println("row1 name: $name")
     println("row1 age: $age")
 }
@@ -102,7 +102,7 @@ fun deleteRow(table: Table) {
     // prepare
     val put = Put(Bytes.toBytes("row1"))
     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Alice"))
-    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes("20"))
+    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(20))
     table.put(put)
 
     // delete (row)
@@ -114,7 +114,7 @@ fun deleteColumn(table: Table) {
     // prepare
     val put = Put(Bytes.toBytes("row1"))
     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Alice"))
-    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes("20"))
+    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(20))
     table.put(put)
 
     // delete (column)
@@ -127,15 +127,15 @@ fun scan(table: Table) {
     // prepare
     val put = Put(Bytes.toBytes("row1"))
     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Alice"))
-    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes("20"))
+    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(20))
     table.put(put)
     val put2 = Put(Bytes.toBytes("row2"))
     put2.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Bobby"))
-    put2.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes("33"))
+    put2.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(33))
     table.put(put2)
     val put3 = Put(Bytes.toBytes("row3"))
     put3.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Cindy"))
-    put3.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes("19"))
+    put3.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(19))
     table.put(put3)
 
     // scan
@@ -143,7 +143,7 @@ fun scan(table: Table) {
     val resultScanner = table.getScanner(scan)
     resultScanner.forEach { result ->
         val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
-        val scanAge = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
+        val scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
         println("scan name: $scanName")
         println("scan age: $scanAge")
     }
@@ -182,18 +182,24 @@ fun filter(table: Table) {
     val resultQualifierFilter = table.getScanner(scan)
     resultQualifierFilter.forEach { result ->
         val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
-        val scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age"))?: byteArrayOf())
+        var scanAge: Int? = null
+        if (result.containsColumn(Bytes.toBytes("f"), Bytes.toBytes("age"))) {
+            scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")) ?: Bytes.toBytes(-1))
+        }
         println("scan name(qualifier filter): $scanName")
         println("scan age(qualifier filter): $scanAge")
     }
 
     // value filter
     val valueFilter = ValueFilter(CompareFilter.CompareOp.GREATER, BinaryComparator(Bytes.toBytes(20)))
-    scan.filter = qualifierFilter
+    scan.filter = valueFilter
     val resultValueFilter = table.getScanner(scan)
     resultValueFilter.forEach { result ->
         val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
-        val scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
+        var scanAge: Int? = null
+        if (result.containsColumn(Bytes.toBytes("f"), Bytes.toBytes("age"))) {
+            scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")) ?: Bytes.toBytes(-1))
+        }
         println("scan name(value filter): $scanName")
         println("scan age(value filter): $scanAge")
     }
@@ -202,7 +208,7 @@ fun filter(table: Table) {
 fun mutateRow(table: Table) {
     val put = Put(Bytes.toBytes("row1"))
     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"), Bytes.toBytes("Alice"))
-    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes("20"))
+    put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(20))
     val delete = Delete(Bytes.toBytes("row1"))
     delete.addColumn(Bytes.toBytes("f"), Bytes.toBytes("name"))
 
@@ -219,7 +225,7 @@ fun mutateRow(table: Table) {
     val resultMutateRow = table.getScanner(scan)
     resultMutateRow.forEach { result ->
         val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
-        val scanAge = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
+        val scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
         val scanCountry = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("country")))
         println("scan name: $scanName")
         println("scan age: $scanAge")
