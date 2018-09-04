@@ -9,7 +9,6 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
     maven {
-        // url "https://repository.cloudera.com/content/repositories/releases/",
         url 'https://repository.cloudera.com/cloudera/cloudera-repos/'
     }
 }
