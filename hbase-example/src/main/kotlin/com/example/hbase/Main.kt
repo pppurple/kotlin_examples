@@ -183,7 +183,7 @@ fun filter(table: Table) {
         val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
         var scanAge: Int? = null
         if (result.containsColumn(Bytes.toBytes("f"), Bytes.toBytes("age"))) {
-            scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")) ?: Bytes.toBytes(-1))
+            scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
         }
         println("scan name(qualifier filter): $scanName")
         println("scan age(qualifier filter): $scanAge")
@@ -197,7 +197,7 @@ fun filter(table: Table) {
         val scanName = Bytes.toString(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("name")))
         var scanAge: Int? = null
         if (result.containsColumn(Bytes.toBytes("f"), Bytes.toBytes("age"))) {
-            scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")) ?: Bytes.toBytes(-1))
+            scanAge = Bytes.toInt(result.getValue(Bytes.toBytes("f"), Bytes.toBytes("age")))
         }
         println("scan name(value filter): $scanName")
         println("scan age(value filter): $scanAge")
