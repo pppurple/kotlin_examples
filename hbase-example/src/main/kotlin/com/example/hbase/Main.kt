@@ -279,7 +279,7 @@ fun cas(table: Table) {
     val deleteResult = table.checkAndDelete(Bytes.toBytes("row1"), Bytes.toBytes("f"), Bytes.toBytes("age"), Bytes.toBytes(18), delete)
     println("delete result: $deleteResult")
 
-    val exists= table.exists(get)
+    val exists = table.exists(get)
     println("row1 exists?: $exists")
 }
 
