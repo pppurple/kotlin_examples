@@ -2,8 +2,19 @@ package com.example.hbase
 
 import org.apache.hadoop.hbase.HBaseConfiguration
 import org.apache.hadoop.hbase.TableName
-import org.apache.hadoop.hbase.client.*
-import org.apache.hadoop.hbase.filter.*
+import org.apache.hadoop.hbase.client.ConnectionFactory
+import org.apache.hadoop.hbase.client.Delete
+import org.apache.hadoop.hbase.client.Get
+import org.apache.hadoop.hbase.client.Increment
+import org.apache.hadoop.hbase.client.Put
+import org.apache.hadoop.hbase.client.RowMutations
+import org.apache.hadoop.hbase.client.Scan
+import org.apache.hadoop.hbase.client.Table
+import org.apache.hadoop.hbase.filter.BinaryComparator
+import org.apache.hadoop.hbase.filter.CompareFilter
+import org.apache.hadoop.hbase.filter.QualifierFilter
+import org.apache.hadoop.hbase.filter.RowFilter
+import org.apache.hadoop.hbase.filter.ValueFilter
 import org.apache.hadoop.hbase.util.Bytes
 
 fun main(args: Array<String>) {
