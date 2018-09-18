@@ -26,7 +26,7 @@ fun main(args: Array<String>) {
     // val table: HTableInterface = HTable(conf, "")
 
     ConnectionFactory.createConnection(conf).use {
-        val tableName= TableName.valueOf("myspace:people")
+        val tableName = TableName.valueOf("myspace:people")
         it.getTable(tableName).use { table ->
             cleanup(table) // cleanup
 
@@ -250,6 +250,7 @@ fun increment(table: Table) {
     put.addColumn(Bytes.toBytes("f"), Bytes.toBytes("stamina"), Bytes.toBytes(100L))
     table.put(put)
 
+    // increment
     val increment = Increment(Bytes.toBytes("row1"))
     increment.addColumn(Bytes.toBytes("f"), Bytes.toBytes("age"), 1L)
     increment.addColumn(Bytes.toBytes("f"), Bytes.toBytes("stamina"), -10L)
