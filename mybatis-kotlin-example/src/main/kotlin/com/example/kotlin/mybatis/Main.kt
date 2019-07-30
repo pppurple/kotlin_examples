@@ -24,15 +24,18 @@ fun main(args: Array<String>) {
         // select one
         val userDao = session.getMapper(UserDao::class.java)
         val user = userDao.selectByUserId(1)
+        println("-- select one --")
         println("user: $user")
 
         // select all
+        println("-- select all --")
         val users = userDao.selectAll()
         users.forEach {
             println("user: $it")
         }
 
         // select GroupUser
+        println("-- select using collection --")
         val groupUser = userDao.selectGroupUser(1)
         groupUser.users.forEach {
             println("user: $it")

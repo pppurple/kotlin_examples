@@ -1,5 +1,8 @@
 package com.example.kotlin.mybatis.model
 
+import com.example.kotlin.mybatis.annotations.NoArg
+
+@NoArg
 data class User (
     val userId: Int,
     val name: String,
