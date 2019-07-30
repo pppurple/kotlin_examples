@@ -3,7 +3,6 @@ package com.example.kotlin.mybatis.dao
 import com.example.kotlin.mybatis.model.GroupUser
 import com.example.kotlin.mybatis.model.User
 import org.apache.ibatis.annotations.ResultMap
-import org.apache.ibatis.annotations.Results
 import org.apache.ibatis.annotations.Select
 
 interface UserDao {
@@ -25,4 +24,17 @@ interface UserDao {
     )
     @ResultMap("groupUser")
     fun selectGroupUser(groupId: Int): GroupUser
+
+    // this is not allowed
+    /*
+    @Select(
+        "SELECT * FROM user",
+        "ORDER BY ${column}"
+    )
+    */
+    @Select(
+        "SELECT * FROM user",
+        "ORDER BY ${"$"}{column}"
+    )
+    fun selectOrderBy(column: String): List<User>
 }

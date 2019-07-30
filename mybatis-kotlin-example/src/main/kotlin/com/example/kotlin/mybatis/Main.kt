@@ -40,5 +40,12 @@ fun main(args: Array<String>) {
         groupUser.users.forEach {
             println("user: $it")
         }
+
+        // select order by
+        println("-- select order by --")
+        val sorted = userDao.selectOrderBy("name DESC")
+        sorted.forEach {
+            println("user: $it")
+        }
     }
 }
