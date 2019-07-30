@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
     val ds = UnpooledDataSource(JDBC_DRIVER, JDBC_URL, "username", "password")
     val environment = Environment("test", JdbcTransactionFactory(), ds)
     val config = Configuration(environment)
-
+    config.isMapUnderscoreToCamelCase = true
     config.addMapper(UserDao::class.java)
     val sqlSessionFactory = SqlSessionFactoryBuilder().build(config)
 
