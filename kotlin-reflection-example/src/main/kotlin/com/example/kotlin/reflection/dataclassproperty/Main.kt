@@ -1,4 +1,4 @@
-package com.example.kotlin
+package com.example.kotlin.reflection.dataclassproperty
 
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.KProperty
