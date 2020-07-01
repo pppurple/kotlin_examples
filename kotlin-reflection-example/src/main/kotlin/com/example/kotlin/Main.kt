@@ -1,6 +1,7 @@
 package com.example.kotlin
 
 import kotlin.reflect.KMutableProperty
+import kotlin.reflect.KProperty
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
@@ -14,6 +15,12 @@ fun main(args: Array<String>) {
         )
         println("before: $mutable")
 
+        /* for debug
+        mutable::class.memberProperties.forEach {
+            println(it)
+            println(it::class)
+        }
+        */
         val ageProperty = mutable::class.memberProperties
             .first { it.name == "age" } as KMutableProperty<*>
         ageProperty.isAccessible = true
@@ -25,22 +32,25 @@ fun main(args: Array<String>) {
     run {
         // Using kotlin reflection
         // immutable data class
-
-        // error!!
-        /*
         val readOnly = RealOnlyPerson(
             "Anna",
             20
         )
         println("before: $readOnly")
 
+        /* for debug
+        readOnly::class.memberProperties.forEach {
+            println(it)
+            println(it::class)
+        }
+        */
         val ageProperty = readOnly::class.memberProperties
-            .first { it.name == "age" } as KMutableProperty<*>
+            .first { it.name == "age" } as KProperty<*>
         ageProperty.isAccessible = true
-        ageProperty.setter.call(readOnly, 21)
+        // Can't call setter method because it's not declared
+        // ageProperty.setter.call(readOnly, 21)
 
         println("after : $readOnly")
-        */
     }
 
     run {
