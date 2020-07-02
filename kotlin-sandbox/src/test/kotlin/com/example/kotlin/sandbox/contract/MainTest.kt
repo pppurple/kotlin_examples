@@ -5,7 +5,8 @@ import org.junit.Test
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.contract
 
-class MainTest{
+class MainTest {
+
     @Test
     fun personTest() {
         // if not use contract
@@ -24,6 +25,15 @@ class MainTest{
         assertThat(person.name).isEqualTo("Dad")
     }
 
+    @Test
+    @ExperimentalContracts
+    fun nullPersonTestUsingContract() {
+        val person = getNullPerson()
+        // error!
+        // assertThatNotNull(person)
+        assertThat(person).isNull()
+    }
+
     private fun getPerson(): Person? {
         // emulate searching from DB
         return Person(
@@ -32,9 +42,14 @@ class MainTest{
         )
     }
 
+    private fun getNullPerson(): Person? {
+        // return always null
+        return null
+    }
+
     data class Person(
-        val age:Int,
-        val name:String
+        val age: Int,
+        val name: String
     )
 }
 
@@ -43,4 +58,5 @@ fun assertThatNotNull(actual: Any?) {
     contract {
         returns() implies (actual != null)
     }
+    assertThat(actual).isNotNull
 }
