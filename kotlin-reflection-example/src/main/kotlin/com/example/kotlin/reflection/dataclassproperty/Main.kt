@@ -5,7 +5,19 @@ import kotlin.reflect.KProperty
 import kotlin.reflect.full.memberProperties
 import kotlin.reflect.jvm.isAccessible
 
-fun main(args: Array<String>) {
+fun main() {
+    run {
+        // basic data class usage
+        val person = Person(
+            name = "Alice",
+            age = 20
+        )
+        val aged = person.copy(
+            age = 21
+        )
+        println("aged: $aged")
+    }
+
     run {
         // Using kotlin reflection
         // mutable data class
@@ -128,6 +140,11 @@ data class MutablePerson(
 )
 
 data class RealOnlyPerson(
+    val name: String,
+    val age: Int
+)
+
+data class Person(
     val name: String,
     val age: Int
 )
