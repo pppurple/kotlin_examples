@@ -27,7 +27,8 @@ fun main() {
         )
         println("before: $mutable")
 
-        /* for debug
+        // for debug
+        /*
         mutable::class.memberProperties.forEach {
             println(it)
             println(it::class)
@@ -50,7 +51,8 @@ fun main() {
         )
         println("before: $readOnly")
 
-        /* for debug
+        // for debug
+        /*
         readOnly::class.memberProperties.forEach {
             println(it)
             println(it::class)
@@ -94,7 +96,6 @@ fun main() {
         println("before: $readOnly")
 
         val setter = readOnly::class.java.getMethod("setAge", Int::class.java)
-        // val setter = mutable.javaClass.getMethod("setAge", Int::class.java)
         setter.invoke(readOnly, 33)
 
         println("after : $readOnly")
