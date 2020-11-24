@@ -8,8 +8,8 @@ import kotlinx.coroutines.runBlocking
 fun main() = runBlocking<Unit> {
     GlobalScope.launch {
         delay(1_000L)
-        println("World!")
+        println("World! [${Thread.currentThread().name}]")
     }
-    println("Hello,")
+    println("Hello, [${Thread.currentThread().name}]")
     delay(2_000L)
 }
