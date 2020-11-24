@@ -1,8 +1,9 @@
-package com.example.coroutin.basic
+package com.example.coroutine.basic
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 fun main() {
     GlobalScope.launch {
@@ -10,5 +11,9 @@ fun main() {
         println("World! [${Thread.currentThread().name}]")
     }
     println("Hello, [${Thread.currentThread().name}]")
-    Thread.sleep(2_000L)
+    runBlocking {
+        println("...delay..., [${Thread.currentThread().name}]")
+        delay(2_000L)
+    }
 }
+
