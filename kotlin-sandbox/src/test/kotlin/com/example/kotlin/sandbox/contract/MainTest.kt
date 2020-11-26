@@ -9,7 +9,7 @@ class MainTest {
 
     @Test
     fun personTest() {
-        // if not use contract
+        // when not using contract
         val person = getPerson()
         assertThat(person).isNotNull
         assertThat(person!!.age).isEqualTo(40)
