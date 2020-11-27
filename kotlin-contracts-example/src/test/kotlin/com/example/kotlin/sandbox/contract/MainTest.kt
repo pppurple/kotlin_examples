@@ -8,7 +8,7 @@ import kotlin.contracts.contract
 class MainTest {
 
     @Test
-    fun personTest() {
+    fun getPersonTest() {
         // when not using contract
         val person = getPerson()
         assertThat(person).isNotNull
@@ -18,7 +18,7 @@ class MainTest {
 
     @Test
     @ExperimentalContracts
-    fun personTestUsingContract() {
+    fun getPersonTestUsingContract() {
         val person = getPerson()
         assertThatNotNull(person)
         assertThat(person.age).isEqualTo(40)
@@ -27,7 +27,7 @@ class MainTest {
 
     @Test
     @ExperimentalContracts
-    fun nullPersonTestUsingContract() {
+    fun getNullPersonTestUsingContract() {
         val person = getNullPerson()
         // error!
         // assertThatNotNull(person)
