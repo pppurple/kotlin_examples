@@ -3,8 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.2.12.BUILD-SNAPSHOT"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
-    kotlin("jvm") version "1.3.72"
-    kotlin("plugin.spring") version "1.3.72"
+    kotlin("jvm") version "1.4.20"
+    kotlin("plugin.spring") version "1.4.20"
 }
 
 group = "com.example.jackson"
@@ -27,7 +27,7 @@ dependencyManagement {
     imports {
         // https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-dependency-versions.html#dependency-versions-properties
         mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES) {
-//             extra["jackson-bom.version"] = "2.10.0"
+//            extra["jackson-bom.version"] = "2.10.0"
             extra["jackson-bom.version"] = "2.10.1"
         }
     }
