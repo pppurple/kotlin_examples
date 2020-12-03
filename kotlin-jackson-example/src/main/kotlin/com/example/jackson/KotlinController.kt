@@ -45,7 +45,6 @@ class KotlinController {
         val isTestUser: Boolean
     )
 
-
     class KotlinPersonWithJsonProperty(
         val name: String,
         val canWalk: Boolean,

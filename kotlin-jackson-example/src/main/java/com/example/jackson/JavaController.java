@@ -45,9 +45,9 @@ public class JavaController {
     }
 
     public static class JavaPerson {
-        private String name;
-        private boolean canWalk;
-        private boolean isTestUser;
+        private final String name;
+        private final boolean canWalk;
+        private final boolean isTestUser;
 
         public JavaPerson(
                 String name,
@@ -58,12 +58,24 @@ public class JavaController {
             this.canWalk = canWalk;
             this.isTestUser = isTestUser;
         }
+
+        public String getName() {
+            return name;
+        }
+
+        public boolean isCanWalk() {
+            return canWalk;
+        }
+
+        public boolean isTestUser() {
+            return isTestUser;
+        }
     }
 
     public static class JavaPersonNonIsPrefix {
-        private String name;
-        private boolean canWalk;
-        private boolean testUser;
+        private final String name;
+        private final boolean canWalk;
+        private final boolean testUser;
 
         public JavaPersonNonIsPrefix(
                 String name,
@@ -73,6 +85,18 @@ public class JavaController {
             this.name = name;
             this.canWalk = canWalk;
             this.testUser = testUser;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public boolean isCanWalk() {
+            return canWalk;
+        }
+
+        public boolean isTestUser() {
+            return testUser;
         }
     }
 
