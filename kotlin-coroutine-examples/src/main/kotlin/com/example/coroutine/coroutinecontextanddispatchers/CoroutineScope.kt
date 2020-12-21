@@ -2,14 +2,13 @@ package com.example.coroutine.coroutinecontextanddispatchers
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.time.Instant
 
-fun main() = runBlocking<Unit> {
+fun main() = runBlocking {
     val activity = Activity()
     activity.doSomething()
     println("[${Instant.now()}] Launched coroutines [${Thread.currentThread().name}]")
