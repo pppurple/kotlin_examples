@@ -4,11 +4,12 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.time.Instant
 
 fun main() = runBlocking {
     GlobalScope.launch {
         repeat(1_000) { i ->
-            println("I'm sleeping $i ... [${Thread.currentThread().name}]")
+            println("[${Instant.now()}] I'm sleeping $i ... [${Thread.currentThread().name}]")
             delay(500L)
         }
     }
