@@ -12,9 +12,9 @@ fun main() = runBlocking {
             delay(1_000L)
         }
     }
-    delay(2_300L)
-    println("main: I'm tired of waiting! [${Thread.currentThread().name}]")
-    job.cancel()
-    job.join()
-    println("main: Now I can quit [${Thread.currentThread().name}]")
+    delay(2_300L) // delay a bit
+    println("main: I'm tired of waiting! [${Instant.now()}] [${Thread.currentThread().name}]")
+    job.cancel() // cancels the job
+    job.join() // waits for job's completion
+    println("main: Now I can quit [${Instant.now()}] [${Thread.currentThread().name}]")
 }
