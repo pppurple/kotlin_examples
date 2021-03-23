@@ -11,7 +11,7 @@ fun main() = runBlocking {
             println("I'm sleeping $i ... [${Instant.now()}] [${Thread.currentThread().name}]")
             delay(1_000L)
         }
-        "Done"
+        "Done" // will get cancelled before it produces this result
     }
     println("Result is $result. [${Instant.now()}] [${Thread.currentThread().name}]")
 }
