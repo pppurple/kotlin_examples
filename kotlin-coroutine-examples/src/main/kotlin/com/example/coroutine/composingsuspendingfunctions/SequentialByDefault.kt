@@ -16,6 +16,7 @@ fun main() = runBlocking {
 
 suspend fun doSomethingUsefulOne(): Int {
     println("processing task one... [${Instant.now()}] [${Thread.currentThread().name}]")
+    // pretend we are doing something useful here
     delay(1_000L)
     println("done task one. [${Instant.now()}] [${Thread.currentThread().name}]")
     return 13
@@ -23,6 +24,7 @@ suspend fun doSomethingUsefulOne(): Int {
 
 suspend fun doSomethingUsefulTwo(): Int {
     println("processing task two... [${Instant.now()}] [${Thread.currentThread().name}]")
+    // pretend we are doing something useful here, too
     delay(1_000L)
     println("done task two. [${Instant.now()}] [${Thread.currentThread().name}]")
     return 29
