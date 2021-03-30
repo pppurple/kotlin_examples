@@ -16,7 +16,6 @@ fun main() {
         // but waiting for a result must involve either suspending or blocking.
         // here we use `runBlocking { ... }` to block the main thread while waiting for the result
         runBlocking {
-            // doErrorTask()
             println("The answer is ${one.await() + two.await()}. [${Instant.now()}] [${Thread.currentThread().name}]")
         }
     }
@@ -30,11 +29,13 @@ fun somethingUsefulOneAsync() = GlobalScope.async {
 
 // The result type of somethingUsefulTwoAsync is Deferred<Int>
 fun somethingUsefulTwoAsync() = GlobalScope.async {
+    // doErrorTask()
     doSomethingUsefulTwo()
 }
 
 fun doErrorTask() {
     Thread.sleep(10)
+    println("Unexpected error occur! [${Instant.now()}] [${Thread.currentThread().name}]")
     throw UnexpectedException()
 }
 
