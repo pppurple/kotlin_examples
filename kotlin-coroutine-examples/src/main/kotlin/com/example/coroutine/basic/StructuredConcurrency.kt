@@ -12,4 +12,3 @@ fun main() = runBlocking {
     }
     println("[${Instant.now()}] Hello, [${Thread.currentThread().name}]")
 }
-
