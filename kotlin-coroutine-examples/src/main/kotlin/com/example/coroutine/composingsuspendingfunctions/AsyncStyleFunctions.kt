@@ -3,7 +3,6 @@ package com.example.coroutine.composingsuspendingfunctions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import java.lang.Exception
 import java.time.Instant
 import kotlin.system.measureTimeMillis
 
@@ -29,14 +28,5 @@ fun somethingUsefulOneAsync() = GlobalScope.async {
 
 // The result type of somethingUsefulTwoAsync is Deferred<Int>
 fun somethingUsefulTwoAsync() = GlobalScope.async {
-    // doErrorTask()
     doSomethingUsefulTwo()
 }
-
-fun doErrorTask() {
-    Thread.sleep(10)
-    println("Unexpected error occur! [${Instant.now()}] [${Thread.currentThread().name}]")
-    throw UnexpectedException()
-}
-
-class UnexpectedException : Exception()
