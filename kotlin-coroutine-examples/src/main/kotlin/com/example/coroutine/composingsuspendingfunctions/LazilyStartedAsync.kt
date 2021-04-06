@@ -10,6 +10,7 @@ fun main() = runBlocking {
     val time = measureTimeMillis {
         val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
         val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
+        // some computation
         one.start()
         two.start()
         println("The answer is ${one.await() + two.await()}. [${Instant.now()}] [${Thread.currentThread().name}]")
@@ -17,10 +18,9 @@ fun main() = runBlocking {
     println("Completed in $time ms. [${Instant.now()}] [${Thread.currentThread().name}]")
 }
 
-// Don't call start().
-// This will lead to sequential behavior
 /*
 fun main() = runBlocking {
+    // If don't call start(),this will lead to sequential behavior
     val time = measureTimeMillis {
         val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
         val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }

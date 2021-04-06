@@ -5,7 +5,6 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import java.time.Instant
-import kotlin.system.measureTimeMillis
 
 fun main() = runBlocking<Unit> {
     try {
@@ -18,8 +17,12 @@ fun main() = runBlocking<Unit> {
 suspend fun failConcurrentSum(): Int = coroutineScope {
     val one = async<Int> {
         try {
-            delay(Long.MAX_VALUE)
+            delay(Long.MAX_VALUE) // Emulates very long computation
             42
+        } catch (e: Exception) {
+            println("Caught ${e.cause}. ${e.message}")
+            e.printStackTrace()
+            0
         } finally {
             println("First child was cancelled. [${Instant.now()}] [${Thread.currentThread().name}]")
         }
