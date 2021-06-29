@@ -5,4 +5,5 @@ import kotlinx.coroutines.runBlocking
 
 fun main() = runBlocking {
     println("My job is ${coroutineContext[Job]}")
+    println(coroutineContext[Job]?.isActive)
 }
