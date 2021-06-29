@@ -8,13 +8,15 @@ import java.time.Instant
 
 fun main() = runBlocking<Unit> {
     launch(Dispatchers.Unconfined) {
-        println("[${Instant.now()}] Unconfined: I'm working in thread [${Thread.currentThread().name}]")
+        // not confined -- will work with main thread
+        println("Unconfined: I'm working in thread [${Instant.now()}] [${Thread.currentThread().name}]")
         delay(500)
-        println("[${Instant.now()}] Unconfined: After delay in thread [${Thread.currentThread().name}]")
+        println("Unconfined: After delay in thread [${Instant.now()}] [${Thread.currentThread().name}]")
     }
     launch {
-        println("[${Instant.now()}] main runBlocking: I'm working in thread [${Thread.currentThread().name}]")
-        delay(500)
-        println("[${Instant.now()}] main runBlocking: After delay in thread [${Thread.currentThread().name}]")
+        // context of the parent, main runBlocking coroutine
+        println("main runBlocking: I'm working in thread [${Instant.now()}] [${Thread.currentThread().name}]")
+        delay(1000)
+        println("main runBlocking: After delay in thread [${Instant.now()}] [${Thread.currentThread().name}]")
     }
 }
