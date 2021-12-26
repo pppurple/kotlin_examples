@@ -4,7 +4,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import java.time.Instant
 
-fun log(msg: String) = println("[${Instant.now()}] [${Thread.currentThread().name}] $msg")
+fun log(msg: String) = println("$msg [${Instant.now()}] [${Thread.currentThread().name}]")
 
 fun main() = runBlocking {
     val a = async {
