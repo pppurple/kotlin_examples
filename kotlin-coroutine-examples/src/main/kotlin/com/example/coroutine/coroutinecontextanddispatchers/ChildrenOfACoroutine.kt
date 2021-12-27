@@ -11,7 +11,7 @@ fun main() = runBlocking {
     val request = launch {
         // it spawns two other jobs
         launch(Job()) {
-            println("job1: I run in GlobalScope and execute independently! [${Instant.now()}] [${Thread.currentThread().name}]")
+            println("job1: I run in my own Job and execute independently! [${Instant.now()}] [${Thread.currentThread().name}]")
             delay(1000)
             println("job1: I am not affected by cancellation of the request [${Instant.now()}] [${Thread.currentThread().name}]")
         }

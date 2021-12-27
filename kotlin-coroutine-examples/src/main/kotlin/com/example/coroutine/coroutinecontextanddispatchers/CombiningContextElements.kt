@@ -8,6 +8,6 @@ import java.time.Instant
 
 fun main() = runBlocking<Unit> {
     launch(Dispatchers.Default + CoroutineName("test")) {
-        println("[${Instant.now()}] I'm working in thread [${Thread.currentThread().name}]")
+        println("I'm working in thread [${Instant.now()}] [${Thread.currentThread().name}]")
     }
 }
