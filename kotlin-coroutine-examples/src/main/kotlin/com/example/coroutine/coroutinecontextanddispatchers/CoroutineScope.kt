@@ -11,9 +11,9 @@ import java.time.Instant
 fun main() = runBlocking {
     val activity = Activity()
     activity.doSomething()
-    println("[${Instant.now()}] Launched coroutines [${Thread.currentThread().name}]")
+    println("Launched coroutines [${Instant.now()}] [${Thread.currentThread().name}]")
     delay(500L)
-    println("[${Instant.now()}] Destroying activity! [${Thread.currentThread().name}]")
+    println("Destroying activity! [${Instant.now()}] [${Thread.currentThread().name}]")
     activity.destroy()
     delay(1000L)
 }
@@ -29,7 +29,7 @@ class Activity {
         repeat(10) { i ->
             mainScope.launch {
                 delay((i + 1) * 200L)
-                println("[${Instant.now()}] Coroutine $i is done [${Thread.currentThread().name}]")
+                println("Coroutine $i is done [${Instant.now()}] [${Thread.currentThread().name}]")
             }
         }
     }
