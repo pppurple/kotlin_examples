@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.4.31'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
 }
 
 group 'com.example.coroutine.kotlin'
@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0'
 }
 
 compileKotlin {

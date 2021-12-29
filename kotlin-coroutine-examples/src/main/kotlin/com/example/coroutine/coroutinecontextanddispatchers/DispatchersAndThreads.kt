@@ -6,15 +6,19 @@ import java.time.Instant
 @ObsoleteCoroutinesApi
 fun main() = runBlocking<Unit> {
     launch {
-        println("main runBlocking: I'm working in thread [${Thread.currentThread().name}] [${Instant.now()}]")
+        // context of the parent, main runBlocking coroutine
+        println("main runBlocking: I'm working in thread [${Instant.now()}] [${Thread.currentThread().name}]")
     }
     launch(Dispatchers.Unconfined) {
-        println("Unconfined: I'm working in thread [${Thread.currentThread().name}] [${Instant.now()}]")
+        // not confined -- will work with main thread
+        println("Unconfined: I'm working in thread [${Instant.now()}] [${Thread.currentThread().name}]")
     }
     launch(Dispatchers.Default) {
-        println("Default: I'm working in thread [${Thread.currentThread().name}] [${Instant.now()}]")
+        // will get dispatched to DefaultDispatcher
+        println("Default: I'm working in thread [${Instant.now()}] [${Thread.currentThread().name}]")
     }
     launch(newSingleThreadContext("MyOwnThread")) {
-        println("newSingleThreadContext: I'm working in thread [${Thread.currentThread().name}] [${Instant.now()}]")
+        // will get its own new thread
+        println("newSingleThreadContext: I'm working in thread [${Instant.now()}] [${Thread.currentThread().name}]")
     }
 }
