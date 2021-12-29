@@ -10,5 +10,5 @@ fun simpleSeq(): Sequence<Int> = sequence {
 }
 
 fun main() {
-    simpleSeq().forEach { value -> println("[${Instant.now()}] $value") }
+    simpleSeq().forEach { value -> println("$value [${Instant.now()}] [${Thread.currentThread().name}]") }
 }

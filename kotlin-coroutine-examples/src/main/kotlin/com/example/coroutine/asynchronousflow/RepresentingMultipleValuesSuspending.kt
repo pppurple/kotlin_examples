@@ -10,5 +10,5 @@ suspend fun simpleSus(): List<Int> {
 }
 
 fun main() = runBlocking {
-    simpleSus().forEach { value -> println("[${Instant.now()}] $value") }
+    simpleSus().forEach { value -> println("$value [${Instant.now()}] [${Thread.currentThread().name}]") }
 }

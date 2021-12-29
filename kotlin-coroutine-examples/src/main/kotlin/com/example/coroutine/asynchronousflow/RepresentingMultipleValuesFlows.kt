@@ -20,9 +20,9 @@ fun simpleFlow(): Flow<Int> = flow {
 fun main() = runBlocking {
     launch {
         for (k in 1..3) {
-            println("[${Instant.now()}] I'm not blocked $k")
+            println("I'm not blocked $k [${Instant.now()}] [${Thread.currentThread().name}]")
             delay(500)
         }
     }
-    simpleFlow().collect { value -> println("[${Instant.now()}] $value") }
+    simpleFlow().collect { value -> println("$value [${Instant.now()}] [${Thread.currentThread().name}]") }
 }
