@@ -5,7 +5,7 @@ import kotlinx.coroutines.runBlocking
 import java.time.Instant
 
 suspend fun simpleSus(): List<Int> {
-    delay(1000)
+    delay(1000) // pretend we are doing something asynchronous here
     return listOf(1, 2, 3)
 }
 

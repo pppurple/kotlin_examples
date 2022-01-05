@@ -9,7 +9,7 @@ import java.time.Instant
 fun coldFlow(): Flow<Int> = flow {
     println("Flow started [${Instant.now()}] [${Thread.currentThread().name}]")
     for (i in 1..3) {
-        delay(100)
+        delay(1000)
         emit(i)
     }
 }
