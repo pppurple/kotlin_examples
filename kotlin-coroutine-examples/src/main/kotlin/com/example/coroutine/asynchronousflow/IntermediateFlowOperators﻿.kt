@@ -4,7 +4,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
-import java.time.Instant
 
 suspend fun performRequest(request: Int): String {
     delay(1000) // imitate long-running asynchronous work
@@ -14,7 +13,5 @@ suspend fun performRequest(request: Int): String {
 fun main() = runBlocking {
     (1..3).asFlow() // a flow of requests
         .map { request -> performRequest(request) }
-        .collect { response ->
-            println("$response [${Instant.now()}] [${Thread.currentThread().name}]")
-        }
+        .collect { response -> log(response) }
 }

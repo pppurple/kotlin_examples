@@ -4,10 +4,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import java.time.Instant
 
 fun coldFlow(): Flow<Int> = flow {
-    println("Flow started [${Instant.now()}] [${Thread.currentThread().name}]")
+    log("Flow started")
     for (i in 1..3) {
         delay(1000)
         emit(i)
@@ -15,14 +14,14 @@ fun coldFlow(): Flow<Int> = flow {
 }
 
 fun main() = runBlocking<Unit> {
-    println("Calling coldFlow... [${Instant.now()}] [${Thread.currentThread().name}]")
+    log("Calling coldFlow...")
     val flow = coldFlow()
-    println("Calling collect... [${Instant.now()}] [${Thread.currentThread().name}]")
-    flow.collect() { value ->
-        println("$value [${Instant.now()}] [${Thread.currentThread().name}]")
+    log("Calling collect...")
+    flow.collect { value ->
+        log(value)
     }
-    println("Calling collect again... [${Instant.now()}] [${Thread.currentThread().name}]")
-    flow.collect() { value ->
-        println("$value [${Instant.now()}] [${Thread.currentThread().name}]")
+    log("Calling collect again...")
+    flow.collect { value ->
+        log(value)
     }
 }
