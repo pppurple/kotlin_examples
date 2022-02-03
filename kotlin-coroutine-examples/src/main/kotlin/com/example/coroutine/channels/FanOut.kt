@@ -8,10 +8,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 fun CoroutineScope.produceNumbers2() = produce<Int> {
-    var x = 1
+    var x = 1 // start from 1
     while (true) {
-        send(x++)
-        delay(100)
+        send(x++) // produce next
+        delay(100) // wait 0.1s
     }
 }
 
@@ -27,5 +27,5 @@ fun main() = runBlocking {
         launchProcessor(it, producer)
     }
     delay(950)
-    producer.cancel()
+    producer.cancel() // cancel producer coroutine and thus kill them all
 }
