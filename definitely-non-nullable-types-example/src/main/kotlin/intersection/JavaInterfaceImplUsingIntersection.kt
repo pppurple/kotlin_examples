@@ -9,7 +9,15 @@ class JavaInterfaceImplUsingIntersection<T> : JavaInterface<T> {
         list.add(value)
     }
 
-    override fun get(): T & Any {
-        return list[list.lastIndex]!!
+    fun putNullable(value: T) {
+        list.add(value)
+    }
+
+    override fun get(index: Int): T & Any {
+        return list[index]!!
+    }
+
+    fun getNullable(index: Int): T {
+        return list[index]
     }
 }

@@ -9,7 +9,7 @@ class JavaInterfaceImplUsingUpperBounds<T : Any> : JavaInterface<T> {
         list.add(value)
     }
 
-    override fun get(): T {
-        return list[list.lastIndex]
+    override fun get(index :Int): T {
+        return list[index]
     }
 }

@@ -9,11 +9,15 @@ fun main() {
     // error
     // implString.put(null)
 
-    // error
     val implStringNullable = JavaInterfaceImplUsingIntersection<String?>()
     implStringNullable.put("abc")
     implStringNullable.put("")
     // error
     // implStringNullable.put(null)
-    val value = implStringNullable.get()
+
+    println("0: " + implStringNullable.get(0))
+    println("1: " + implStringNullable.get(1))
+
+    implStringNullable.putNullable(null)
+    println("2: " + implStringNullable.getNullable(2))
 }
