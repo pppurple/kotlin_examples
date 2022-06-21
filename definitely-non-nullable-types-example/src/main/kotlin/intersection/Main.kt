@@ -1,7 +1,5 @@
 package intersection
 
-import upper_bounds.JavaInterfaceImplUsingUpperBounds
-
 fun main() {
     val implString = JavaInterfaceImplUsingIntersection<String>()
     implString.put("abc")
@@ -19,5 +17,7 @@ fun main() {
     println("1: " + implStringNullable.get(1))
 
     implStringNullable.putNullable(null)
+    // error: NullPointerException
+    // println("2: " + implStringNullable.get(2))
     println("2: " + implStringNullable.getNullable(2))
 }
