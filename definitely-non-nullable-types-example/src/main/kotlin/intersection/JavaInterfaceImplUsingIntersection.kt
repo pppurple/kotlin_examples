@@ -14,6 +14,8 @@ class JavaInterfaceImplUsingIntersection<T> : JavaInterface<T> {
     }
 
     override fun get(index: Int): T & Any {
+        // error
+        // return list[index]
         return list[index]!!
     }
 
