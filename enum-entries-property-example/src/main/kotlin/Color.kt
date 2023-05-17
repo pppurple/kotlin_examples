@@ -1,7 +1,7 @@
 enum class Color(val colorName: String, val rgb: String) {
     RED("Red", "#FF0000"),
     ORANGE("Orange", "#FF7F00"),
-    YELLOW("Yellow", "#FFFF00")
+    YELLOW("Yellow", "#FFFF00"),
 }
 
 @OptIn(ExperimentalStdlibApi::class)
